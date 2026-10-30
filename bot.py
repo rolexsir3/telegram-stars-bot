@@ -109,12 +109,10 @@ def fmt_exp(ts: int | None) -> str:
 
 # ---------------------------------------------------------------- helpers
 def menu_kb() -> InlineKeyboardMarkup:
-    rows = [
-        [InlineKeyboardButton(f"{p.title} — ⭐ {p.stars}", callback_data=f"buy:{p.id}")]
-        for p in PLANS.values()
-    ]
-    rows.append([InlineKeyboardButton("📋 My access", callback_data="status")])
-    return InlineKeyboardMarkup(rows)
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton("💎 Get Lifetime Access — ⭐ 1000", callback_data="buy:life")],
+        [InlineKeyboardButton("📋 My access", callback_data="status")],
+    ])
 
 
 def is_admin(uid: int) -> bool:
