@@ -47,8 +47,8 @@ class Plan:
 
 
 PLANS: dict[str, Plan] = {
-    "life": Plan("life", "Lifetime Access", 2, None,
-                 "Permanent access to " + CHANNEL_NAME + ". One payment, forever."),
+    "life": Plan("life", "Lifetime Access", 1000, None,
+                 "Permanent access to " + CHANNEL_NAME + ". One time payment, Lifetime access."),
     # To auto-renew instead of expiring, use:
     # "sub": Plan("sub", "Monthly subscription", 150, 30, "Renews every 30 days.",
     #             recurring=True),
