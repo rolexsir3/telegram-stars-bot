@@ -141,7 +141,7 @@ async def in_channel(bot, user_id: int) -> bool:
 
 # ---------------------------------------------------------------- commands
 async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    photo_url = "https://imgur.com/a/MfTj98s"  # <-- Change this URL
+    photo_url = "https://pixhost.top/uploads/rsujsYEIopvyeHD16PMe08N3c3j4I0xVaTC9e1oi.jpg"  # <-- Change this URL
     
     await update.effective_message.reply_photo(
         photo=photo_url,
