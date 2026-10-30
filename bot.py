@@ -141,14 +141,18 @@ async def in_channel(bot, user_id: int) -> bool:
 
 # ---------------------------------------------------------------- commands
 async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.effective_message.reply_text(
-        f"👋 <b>Access to {CHANNEL_NAME}</b>\n\n"
-        "Pick a plan and pay with <b>Telegram Stars</b> — no cards, no crypto, "
-        "paid right inside Telegram. Your invite link arrives instantly.\n\n"
-        f"Questions or payment issues: {SUPPORT}",
+    photo_url = "https://imgur.com/a/MfTj98s"  # <-- Change this URL
+    
+    await update.effective_message.reply_photo(
+        photo=photo_url,
+        caption=(
+            f"👋 <b>Access to {CHANNEL_NAME}</b>\n\n"
+            "Pick a plan and pay with <b>Telegram Stars</b> — no cards, no crypto, "
+            "paid right inside Telegram. Your invite link arrives instantly.\n\n"
+            f"Questions or payment issues: {SUPPORT}"
+        ),
         parse_mode=ParseMode.HTML,
         reply_markup=menu_kb(),
-        disable_web_page_preview=True,
     )
 
 
