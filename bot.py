@@ -37,7 +37,7 @@ CHANNEL_NAME = os.getenv("CHANNEL_NAME", "Private Channel")
 NOWPAYMENTS_API_KEY = os.getenv("NOWPAYMENTS_API_KEY", "")
 NOWPAYMENTS_SANDBOX = os.getenv("NOWPAYMENTS_SANDBOX", "true").lower() == "true"
 CRYPTO_PRICE_USD = float(os.getenv("CRYPTO_PRICE_USD", "20"))
-CRYPTO_CURRENCIES = os.getenv("CRYPTO_CURRENCIES", "btc,eth,usdttrc20,ltc").split(",")
+CRYPTO_CURRENCIES = os.getenv("CRYPTO_CURRENCIES", "usdttrc20,usdterc20,usdtbsc,usdtmatic,usdtarb,usdtop,usdtsol,usdtton").split(",")
 
 nowpayments = NowPayments(NOWPAYMENTS_API_KEY, sandbox=NOWPAYMENTS_SANDBOX) if NOWPAYMENTS_API_KEY else None
 
@@ -208,7 +208,6 @@ async def on_buy(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     uid = query.from_user.id
 
-    # Handle "My access" button
     if query.data == "status":
         await query.answer()
         row = q1("SELECT expires_at FROM access WHERE user_id=?", (uid,))
@@ -218,7 +217,6 @@ async def on_buy(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         return
 
-    # Handle "Back" button
     if query.data == "back":
         await query.answer()
         await query.message.reply_text(
@@ -228,7 +226,6 @@ async def on_buy(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         return
 
-    # Handle "buy:stars" or "buy:crypto"
     if ":" not in query.data:
         await query.answer()
         return
@@ -254,7 +251,7 @@ async def on_buy(update: Update, context: ContextTypes.DEFAULT_TYPE):
             log.error("send_invoice failed: %s", e)
             await query.message.reply_text("⚠️ Couldn't create the invoice. Try again.")
 
-        elif action == "crypto":
+    elif action == "crypto":
         await query.answer()
         if not nowpayments:
             await query.message.reply_text(
@@ -680,7 +677,6 @@ def main():
     app.add_handler(CommandHandler("stats", cmd_stats))
     app.add_handler(CommandHandler("cryptostats", cmd_cryptostats))
 
-    # Fixed pattern - removed $ to match "buy:stars", "buy:crypto", etc.
     app.add_handler(CallbackQueryHandler(on_buy, pattern=r"^(buy:|status|back)"))
     app.add_handler(CallbackQueryHandler(on_crypto_currency, pattern=r"^crypto:"))
     app.add_handler(PreCheckoutQueryHandler(on_pre_checkout))
