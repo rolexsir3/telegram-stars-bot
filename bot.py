@@ -263,15 +263,14 @@ async def on_buy(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
 
         buttons = []
-        currency_names = {
+currency_names = {
     "usdttrc20": "USDT (TRC20 - Tron)",
-    "usdterc20": "USDT (ERC20 - Ethereum)",
-    "usdtbep20": "USDT (BEP20 - BSC)",
-    "usdtsol": "USDT (Solana)",
-    "usdtpolygon": "USDT (Polygon)",
-    "usdtarbitrum": "USDT (Arbitrum)",
+    "usdtbsc": "USDT (BEP20 - BSC)",
+    "usdtmatic": "USDT (Polygon)",
+    "usdtarb": "USDT (Arbitrum)",
     "usdtop": "USDT (Optimism)",
-    "usdtavalanche": "USDT (Avalanche)",
+    "usdtsol": "USDT (Solana)",
+    "usdtton": "USDT (TON)",
 }
         for curr in CRYPTO_CURRENCIES:
             curr = curr.strip()
