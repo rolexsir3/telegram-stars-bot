@@ -162,7 +162,6 @@ async def in_channel(bot, user_id: int) -> bool:
 
 # ---------------------------------------------------------------- COMMANDS
 async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    # Replace with your actual file_id from @RawDataBot, or remove reply_photo and use reply_text
     welcome_photo_id = os.getenv("WELCOME_PHOTO_ID", "")
 
     if welcome_photo_id:
@@ -678,7 +677,8 @@ def main():
     app.add_handler(CommandHandler("stats", cmd_stats))
     app.add_handler(CommandHandler("cryptostats", cmd_cryptostats))
 
-    app.add_handler(CallbackQueryHandler(on_buy, pattern=r"^(buy:|status|back)$"))
+    # Fixed pattern - removed $ to match "buy:stars", "buy:crypto", etc.
+    app.add_handler(CallbackQueryHandler(on_buy, pattern=r"^(buy:|status|back)"))
     app.add_handler(CallbackQueryHandler(on_crypto_currency, pattern=r"^crypto:"))
     app.add_handler(PreCheckoutQueryHandler(on_pre_checkout))
     app.add_handler(MessageHandler(filters.SUCCESSFUL_PAYMENT, on_successful_payment))
