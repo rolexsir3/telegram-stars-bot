@@ -254,7 +254,7 @@ async def on_buy(update: Update, context: ContextTypes.DEFAULT_TYPE):
             log.error("send_invoice failed: %s", e)
             await query.message.reply_text("⚠️ Couldn't create the invoice. Try again.")
 
-    elif action == "crypto":
+        elif action == "crypto":
         await query.answer()
         if not nowpayments:
             await query.message.reply_text(
@@ -263,15 +263,17 @@ async def on_buy(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
 
         buttons = []
-currency_names = {
-    "usdttrc20": "USDT (TRC20 - Tron)",
-    "usdtbsc": "USDT (BEP20 - BSC)",
-    "usdtmatic": "USDT (Polygon)",
-    "usdtarb": "USDT (Arbitrum)",
-    "usdtop": "USDT (Optimism)",
-    "usdtsol": "USDT (Solana)",
-    "usdtton": "USDT (TON)",
-}
+        currency_names = {
+            "usdttrc20": "USDT (TRC20 - Tron)",
+            "usdterc20": "USDT (ERC20 - Ethereum)",
+            "usdtbsc": "USDT (BEP20 - BSC)",
+            "usdtmatic": "USDT (Polygon)",
+            "usdtarb": "USDT (Arbitrum)",
+            "usdtop": "USDT (Optimism)",
+            "usdtsol": "USDT (Solana)",
+            "usdtton": "USDT (TON)",
+        }
+        
         for curr in CRYPTO_CURRENCIES:
             curr = curr.strip()
             name = currency_names.get(curr, curr.upper())
